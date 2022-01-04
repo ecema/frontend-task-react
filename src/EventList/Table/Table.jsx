@@ -33,11 +33,7 @@ function Table({ searchResults, setSelected }) {
                                     </td>
                                 ))}
                                 <td>
-                                    <Link to={{
-                                        pathname: `/detail/${item.id}`,
-                                        query: { JSONResp: JSON.stringify(item) }
-                                        //search: JSON.stringify({ ...item })
-                                    }}>
+                                    <Link to={{pathname: `/detail/${item.id}`}}>
                                         <button onClick={() => setSelected(item)}>details</button>
                                     </Link>
                                 </td>
