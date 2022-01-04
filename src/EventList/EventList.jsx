@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Search from './Search/Search';
 import Table from './Table/Table';
 import axios from 'axios';
-import './EventList.css'
+import './EventList.css';
+import { isGoFirstButtonDisabled, isGoLastButtonDisabled } from './EventListController';
 
 function EventList({ setSelected, setSearchKey, searchKey }) {
 
@@ -44,11 +45,11 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
             <Search setSearchKey={setSearchKey} searchKey={searchKey} />
             <Table searchResults={filteredResults} setSelected={setSelected} />
             <div className="pagination">
-                <button disabled={activePage < 2} onClick={() => setActivePage(1)}>{'<<'}</button>
-                <button disabled={activePage < 2} onClick={() => setActivePage(prev => prev - 1)}>{'<'}</button>
+                <button disabled={isGoFirstButtonDisabled(activePage)} onClick={() => setActivePage(1)}>{'<<'}</button>
+                <button disabled={isGoFirstButtonDisabled(activePage)} onClick={() => setActivePage(prev => prev - 1)}>{'<'}</button>
                 <button disabled>{activePage} / {pageCount - 1}</button>
-                <button disabled={!(activePage < pageCount - 1)} onClick={() => setActivePage(prev => prev + 1)}>{'>'}</button>
-                <button disabled={!(activePage < pageCount - 1)} onClick={() => setActivePage(pageCount - 1)}>{'>>'}</button>
+                <button disabled={isGoLastButtonDisabled(activePage, pageCount)} onClick={() => setActivePage(prev => prev + 1)}>{'>'}</button>
+                <button disabled={isGoLastButtonDisabled(activePage, pageCount)} onClick={() => setActivePage(pageCount - 1)}>{'>>'}</button>
             </div>
         </div>
     )
