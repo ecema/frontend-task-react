@@ -1,13 +1,27 @@
 import React, { useState } from 'react'
-import logo from './logo.svg'
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import EventList from './EventList/EventList';
+import EventDetail from './EventDetail/EventDetail';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [selected, setSelected] = useState({});
+  const [searchKey, setSearchKey] = useState('');
 
   return (
     <div className="App">
-      <img src="https://tarfin.com/img/logo.svg" alt="Tarfin Logo" />
+      <BrowserRouter>
+        <Link to="/">
+          <img src="https://tarfin.com/img/logo.svg" alt="Tarfin Logo" />
+        </Link>
+        <div className="events">
+          <Routes>
+            <Route path="/" element={<EventList setSelected={setSelected} setSearchKey={setSearchKey} searchKey={searchKey} />}></Route>
+            <Route path="/detail/*" element={<EventDetail selected={selected} setSearchKey={setSearchKey} />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   )
 }

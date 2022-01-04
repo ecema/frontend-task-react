@@ -1,0 +1,5 @@
+.event-detail {
+    display: grid;
+    grid-template-rows: repeat(5,50px);
+    font-weight: 600;
+}
