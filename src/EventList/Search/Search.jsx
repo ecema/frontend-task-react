@@ -1,7 +1,7 @@
 import React from 'react'
 import './Search.css'
 
-function Search({ setSearchKey,searchKey }) {
+function Search({ setSearchKey, searchKey }) {
 
     const handleInputChange = (e) => {
         setSearchKey(e.target.value)
