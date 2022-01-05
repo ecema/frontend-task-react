@@ -25,3 +25,15 @@ When you are done, invite me to your project as a collaborator. (@frkcn)
 We will get back to you as soon as possible.
 
 Thanks! 🚀
+
+
+notes
+* npm run dev & npm run test
+* Default list shown on screen is search results without keyword
+* Every change on search text input make new request and screen will be updated
+* Pagination is developed on front end not make new API call
+* details button on table cell direct user to details page about that event
+* Buttons under classification section of each event direct user to main page with search results via selected classification keyword
+* Clicking tarfin logo direct user to main page
+* Table titles are given as dummy data
+* By setting titles and searchResults different table data might be shown on the screen

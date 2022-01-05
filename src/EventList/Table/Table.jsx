@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import './Table.css'
 
-function Table({ searchResults, setSelected }) {
-    const [titles, setTitles] = useState([]);
-
-    useEffect(() => {
-        const titlesDummy = ['name', 'id', 'locale']
-        setTitles(titlesDummy)
-    }, [searchResults])
-
+function Table({ handleSort, filteredResults, setSelected,titles }) {
     return (
         <div>
-            {searchResults.length > 0 ? <table>
+            {filteredResults.length > 0 ? <table>
                 <thead>
                     <tr>
                         {titles.map((title, i) => (
-                            <th key={i}>
+                            <th key={i} onClick={() => handleSort(title)}>
                                 {title}
                             </th>
                         ))}
@@ -25,7 +18,7 @@ function Table({ searchResults, setSelected }) {
                 </thead>
                 <tbody>
                     {
-                        searchResults.map((item, index) => (
+                        filteredResults.map((item, index) => (
                             <tr key={index}>
                                 {titles.map((title, i) => (
                                     <td key={i}>
@@ -33,7 +26,7 @@ function Table({ searchResults, setSelected }) {
                                     </td>
                                 ))}
                                 <td>
-                                    <Link to={{pathname: `/detail/${item.id}`}}>
+                                    <Link to={{ pathname: `/detail/${item.id}` }}>
                                         <button onClick={() => setSelected(item)}>details</button>
                                     </Link>
                                 </td>

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Search from './Search/Search';
 import Table from './Table/Table';
 import axios from 'axios';
-import './EventList.css';
 import { isGoFirstButtonDisabled, isGoLastButtonDisabled } from './EventListController';
+import './EventList.css';
+
+let sortingList = {};
 
 function EventList({ setSelected, setSearchKey, searchKey }) {
 
@@ -11,10 +13,10 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
     const [filteredResults, setFilteredResults] = useState([]);
     const [activePage, setActivePage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
+    const titles = ['name', 'id', 'locale']
     const perPage = 5
 
     const key = '3QhbqoB1lyUOlDCsMeQIzB3BT1Sdn6TT';
-
     const uri = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + searchKey + '&apikey=' + key;
 
     useEffect(() => {
@@ -32,7 +34,6 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
                     setSearchResults([])
                 }
             })
-
     }, [searchKey])
 
     useEffect(() => {
@@ -40,10 +41,21 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
         setFilteredResults(filtered)
     }, [searchResults, activePage])
 
+    const handleSort = (title) => {
+        if (Object.keys(sortingList).length === 0) titles.forEach(title => sortingList[title] = 1)
+
+        let results = [...searchResults];
+        results.sort((a, b) => sortingList[title] > 0 ? a[title].localeCompare(b[title]) : b[title].localeCompare(a[title]));
+        sortingList[title] = sortingList[title] * -1
+
+        setSearchResults(results);
+        setActivePage(1);
+    }
+
     return (
         <div>
             <Search setSearchKey={setSearchKey} searchKey={searchKey} />
-            <Table searchResults={filteredResults} setSelected={setSelected} />
+            <Table handleSort={handleSort} filteredResults={filteredResults} setSelected={setSelected} titles={titles} />
             <div className="pagination">
                 <button disabled={isGoFirstButtonDisabled(activePage)} onClick={() => setActivePage(1)}>{'<<'}</button>
                 <button disabled={isGoFirstButtonDisabled(activePage)} onClick={() => setActivePage(prev => prev - 1)}>{'<'}</button>

@@ -5,5 +5,3 @@ export function isGoFirstButtonDisabled(activePage) {
 export function isGoLastButtonDisabled(activePage, pageCount) {
     return !(activePage < pageCount - 1) 
 }
-
-//module.exports = {isGoFirstButtonDisabled, isGoLastButtonDisabled};

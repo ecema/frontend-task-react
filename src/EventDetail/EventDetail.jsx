@@ -10,7 +10,7 @@ function EventDetail({ selected, setSearchKey }) {
             <div>Name: {selected.name}</div>
             <div>ID: {selected.id}</div>
             <div>URL: {selected.url}</div>
-            <div>Classifications: </div>
+            <div>Classifications: <small>Click category for search</small></div>
             {selected?.classifications?.map((item, i) => (
                 <div key={i}>
                     {Object.keys(item).map((key, index) => (
