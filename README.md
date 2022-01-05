@@ -37,4 +37,4 @@ notes
 * Clicking tarfin logo direct user to main page
 * Table titles are given as dummy data
 * By setting titles and searchResults different table data might be shown on the screen
-* Table data is sortable by clicking tatble titles
+* Table data is sortable by clicking table titles
