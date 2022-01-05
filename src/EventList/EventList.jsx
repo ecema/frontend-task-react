@@ -13,6 +13,7 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
     const [filteredResults, setFilteredResults] = useState([]);
     const [activePage, setActivePage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
+    const [loading, setLoading] = useState(false);
     const titles = ['name', 'id', 'locale']
     const perPage = 5
 
@@ -20,8 +21,9 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
     const uri = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + searchKey + '&apikey=' + key;
 
     useEffect(() => {
-        axios.get(uri,)
+        axios.get(uri)
             .then(response => {
+                setLoading(false)
                 if (response?.data._embedded?.events) {
                     let results = response.data._embedded.events
                     setSearchResults(results)
@@ -34,6 +36,7 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
                     setSearchResults([])
                 }
             })
+        setLoading(true)
     }, [searchKey])
 
     useEffect(() => {
@@ -53,7 +56,8 @@ function EventList({ setSelected, setSearchKey, searchKey }) {
     }
 
     return (
-        <div>
+        loading ? <div className="loading">Loading... █▒▒▒▒▒▒▒▒▒
+        </div> : <div>
             <Search setSearchKey={setSearchKey} searchKey={searchKey} />
             <Table handleSort={handleSort} filteredResults={filteredResults} setSelected={setSelected} titles={titles} />
             <div className="pagination">

@@ -10,7 +10,7 @@ function Table({ handleSort, filteredResults, setSelected,titles }) {
                     <tr>
                         {titles.map((title, i) => (
                             <th key={i} onClick={() => handleSort(title)}>
-                                {title}
+                                {title} ↕
                             </th>
                         ))}
                         <th>action</th>
@@ -27,7 +27,7 @@ function Table({ handleSort, filteredResults, setSelected,titles }) {
                                 ))}
                                 <td>
                                     <Link to={{ pathname: `/detail/${item.id}` }}>
-                                        <button onClick={() => setSelected(item)}>details</button>
+                                        <button onClick={() => setSelected(item)}>details →</button>
                                     </Link>
                                 </td>
                             </tr>
